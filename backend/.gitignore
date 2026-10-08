@@ -1,0 +1,16 @@
+node_modules/
+npm-debug.log
+yarn-error.log
+/vendor/
+/.idea/
+/.vscode/
+.env
+.env.backup
+.env.production
+.env.*.local
+.phpunit.result.cache
+/public/storage
+/storage/*.key
+/bootstrap/cache/
+.DS_Store
+*.pem
