@@ -2,212 +2,125 @@
 
 return [
     'roles' => [
-        'admin' => [
-            'level' => 1,
-            'name' => 'Administrator',
-            'description' => 'Full system access',
-        ],
-        'director' => [
-            'level' => 2,
-            'name' => 'Department Director',
-            'description' => 'Department-level control',
-        ],
-        'responsable' => [
-            'level' => 3,
-            'name' => 'Area Responsible',
-            'description' => 'Area-level management',
-        ],
-        'adjunto_senior' => [
-            'level' => 4,
-            'name' => 'Senior Assistant',
-            'description' => 'Senior operational role',
-        ],
-        'adjunto_junior' => [
-            'level' => 5,
-            'name' => 'Junior Assistant',
-            'description' => 'Junior operational role',
-        ],
-        'operador' => [
-            'level' => 6,
-            'name' => 'Operator',
-            'description' => 'Support and consultation',
-        ],
-        'support' => [
-            'level' => 7,
-            'name' => 'Support Officer',
-            'description' => 'Customer support',
-        ],
         'customer' => [
-            'level' => 8,
-            'name' => 'Individual Customer',
-            'description' => 'End customer',
+            'level' => 1,
+            'label' => 'Customer',
+            'permissions' => [
+                'auth.login',
+                'auth.register',
+                'auth.logout',
+                'auth.2fa',
+                'account.view_own',
+                'transactions.create_own',
+                'transactions.view_own',
+                'kyc.view_own',
+                'kyc.submit',
+            ],
         ],
-        'merchant' => [
-            'level' => 9,
-            'name' => 'Merchant/Business',
-            'description' => 'Business account',
+        'agent' => [
+            'level' => 2,
+            'label' => 'Agency Agent',
+            'permissions' => [
+                'account.create',
+                'account.view',
+                'transactions.create',
+                'transactions.view',
+                'kyc.view',
+                'kyc.submit',
+                'agency.view_own',
+                'reports.daily',
+            ],
         ],
-        'api_partner' => [
-            'level' => 10,
-            'name' => 'API Partner',
-            'description' => 'External integration',
+        'agency_manager' => [
+            'level' => 3,
+            'label' => 'Agency Manager',
+            'permissions' => [
+                'account.create',
+                'account.view',
+                'account.manage',
+                'transactions.create',
+                'transactions.view',
+                'transactions.approve',
+                'kyc.view',
+                'kyc.approve',
+                'agency.manage',
+                'staff.manage',
+                'reports.view',
+                'reports.export',
+            ],
+        ],
+        'compliance_officer' => [
+            'level' => 4,
+            'label' => 'Compliance Officer',
+            'permissions' => [
+                'kyc.view',
+                'kyc.approve',
+                'kyc.reject',
+                'transactions.view',
+                'audit.view',
+                'fraud.view',
+                'fraud.manage',
+                'reports.view',
+                'reports.export',
+            ],
+        ],
+        'admin' => [
+            'level' => 5,
+            'label' => 'Administrator',
+            'permissions' => ['*'],
         ],
     ],
 
     'permissions' => [
-        // Authentication
-        'auth.login' => 'Can login',
-        'auth.register' => 'Can register',
-        'auth.logout' => 'Can logout',
+        // Auth
+        'auth.login' => 'Can login to the system',
+        'auth.register' => 'Can register new account',
+        'auth.logout' => 'Can logout from system',
         'auth.2fa' => 'Can use 2FA',
 
-        // Dashboard
-        'dashboard.view' => 'Can view dashboard',
-        'dashboard.global' => 'Can view global dashboard',
-        'dashboard.department' => 'Can view department dashboard',
-        'dashboard.area' => 'Can view area dashboard',
-
-        // Users
-        'users.list' => 'Can list users',
-        'users.create' => 'Can create users',
-        'users.edit' => 'Can edit users',
-        'users.delete' => 'Can delete users',
-        'users.edit_roles' => 'Can edit user roles',
-        'users.edit_limits' => 'Can edit transaction limits',
-
-        // Departments
-        'departments.list' => 'Can list departments',
-        'departments.create' => 'Can create departments',
-        'departments.edit' => 'Can edit departments',
-        'departments.delete' => 'Can delete departments',
-        'departments.view_all' => 'Can view all departments',
-        'departments.view_own' => 'Can view own department',
-
-        // Areas
-        'areas.list' => 'Can list areas',
-        'areas.create' => 'Can create areas',
-        'areas.edit' => 'Can edit areas',
-        'areas.delete' => 'Can delete areas',
-        'areas.view_own' => 'Can view own area',
+        // Accounts
+        'account.view_own' => 'Can view own account',
+        'account.create' => 'Can create new accounts',
+        'account.view' => 'Can view accounts',
+        'account.manage' => 'Can manage accounts',
+        'account.freeze' => 'Can freeze accounts',
 
         // Transactions
+        'transactions.create_own' => 'Can create own transactions',
         'transactions.create' => 'Can create transactions',
-        'transactions.view' => 'Can view transactions',
-        'transactions.view_all' => 'Can view all transactions',
         'transactions.view_own' => 'Can view own transactions',
+        'transactions.view' => 'Can view transactions',
         'transactions.approve' => 'Can approve transactions',
         'transactions.reject' => 'Can reject transactions',
-        'transactions.cancel' => 'Can cancel transactions',
+        'transactions.reverse' => 'Can reverse transactions',
 
         // KYC
+        'kyc.view_own' => 'Can view own KYC',
         'kyc.view' => 'Can view KYC profiles',
+        'kyc.submit' => 'Can submit KYC documents',
         'kyc.approve' => 'Can approve KYC',
         'kyc.reject' => 'Can reject KYC',
-        'kyc.list' => 'Can list KYC requests',
+
+        // Fraud & AML
+        'fraud.view' => 'Can view fraud alerts',
+        'fraud.manage' => 'Can manage fraud cases',
+        'aml.check' => 'Can check AML status',
+
+        // Agency
+        'agency.view_own' => 'Can view own agency',
+        'agency.manage' => 'Can manage agency',
+        'staff.manage' => 'Can manage staff',
 
         // Reports
-        'reports.view' => 'Can view reports',
+        'reports.daily' => 'Can view daily reports',
+        'reports.view' => 'Can view all reports',
         'reports.export' => 'Can export reports',
-        'reports.global' => 'Can view global reports',
-        'reports.department' => 'Can view department reports',
-        'reports.area' => 'Can view area reports',
 
         // Audit
         'audit.view' => 'Can view audit logs',
         'audit.export' => 'Can export audit logs',
-        'audit.download' => 'Can download audit logs',
-
-        // Compliance
-        'compliance.view' => 'Can view compliance',
-        'compliance.manage' => 'Can manage compliance',
-        'compliance.approve_kyc' => 'Can approve KYC requests',
-        'compliance.aml_check' => 'Can review AML flags',
-
-        // Fraud
-        'fraud.view' => 'Can view fraud alerts',
-        'fraud.manage' => 'Can manage fraud alerts',
 
         // Settings
-        'settings.view' => 'Can view settings',
-        'settings.edit' => 'Can edit settings',
-        'settings.system' => 'Can edit system settings',
-    ],
-
-    'role_permissions' => [
-        'admin' => [
-            // All permissions
-            '*',
-        ],
-        'director' => [
-            'dashboard.view',
-            'dashboard.department',
-            'users.list',
-            'users.create',
-            'users.edit',
-            'users.edit_roles',
-            'departments.view_own',
-            'areas.list',
-            'areas.view_own',
-            'transactions.create',
-            'transactions.view',
-            'transactions.approve',
-            'transactions.reject',
-            'kyc.view',
-            'reports.view',
-            'reports.department',
-            'audit.view',
-        ],
-        'responsable' => [
-            'dashboard.view',
-            'dashboard.area',
-            'users.list',
-            'transactions.create',
-            'transactions.view',
-            'transactions.approve',
-            'transactions.reject',
-            'areas.view_own',
-            'reports.view',
-            'reports.area',
-        ],
-        'adjunto_senior' => [
-            'dashboard.view',
-            'transactions.create',
-            'transactions.view_own',
-            'reports.view',
-        ],
-        'adjunto_junior' => [
-            'dashboard.view',
-            'transactions.create',
-            'transactions.view_own',
-        ],
-        'operador' => [
-            'dashboard.view',
-            'transactions.view',
-            'reports.view',
-        ],
-        'support' => [
-            'dashboard.view',
-            'users.view',
-            'transactions.view',
-            'kyc.view',
-        ],
-        'customer' => [
-            'auth.login',
-            'auth.register',
-            'auth.logout',
-            'auth.2fa',
-            'dashboard.view',
-            'transactions.create',
-            'transactions.view_own',
-        ],
-        'merchant' => [
-            'auth.login',
-            'dashboard.view',
-            'transactions.view_own',
-            'reports.view',
-        ],
-        'api_partner' => [
-            'transactions.view_own',
-        ],
+        'settings.manage' => 'Can manage system settings',
     ],
 ];

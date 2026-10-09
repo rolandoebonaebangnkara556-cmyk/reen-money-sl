@@ -2,51 +2,35 @@
 
 return [
     'enabled' => true,
-    'retention_days' => env('AUDIT_LOG_RETENTION_DAYS', 2555), // 7 years
-    'immutable' => env('AUDIT_LOG_IMMUTABLE', true),
+    'retention_days' => 2555, // 7 años
+    'immutable' => true,
 
-    'log_actions' => [
-        'authentication' => [
-            'user_login',
-            'user_logout',
-            'user_failed_login',
-            'password_changed',
-            '2fa_enabled',
-            '2fa_disabled',
-        ],
-        'users' => [
-            'user_created',
-            'user_updated',
-            'user_deleted',
-            'role_assigned',
-            'role_removed',
-            'permission_assigned',
-        ],
-        'transactions' => [
-            'transaction_created',
-            'transaction_approved',
-            'transaction_rejected',
-            'transaction_completed',
-            'transaction_failed',
-            'transaction_reversed',
-        ],
-        'kyc' => [
-            'kyc_submitted',
-            'kyc_approved',
-            'kyc_rejected',
-            'kyc_level_upgraded',
-        ],
-        'compliance' => [
-            'aml_flag_created',
-            'aml_flag_reviewed',
-            'fraud_alert_created',
-        ],
-        'settings' => [
-            'config_changed',
-            'limit_changed',
-            'department_created',
-            'area_created',
-        ],
+    'actions' => [
+        'user_login' => 'User Login',
+        'user_logout' => 'User Logout',
+        'user_failed_login' => 'Failed Login Attempt',
+        'password_changed' => 'Password Changed',
+        '2fa_enabled' => '2FA Enabled',
+        '2fa_disabled' => '2FA Disabled',
+        'account_created' => 'Account Created',
+        'account_updated' => 'Account Updated',
+        'account_frozen' => 'Account Frozen',
+        'account_closed' => 'Account Closed',
+        'transaction_created' => 'Transaction Created',
+        'transaction_approved' => 'Transaction Approved',
+        'transaction_rejected' => 'Transaction Rejected',
+        'transaction_completed' => 'Transaction Completed',
+        'transaction_failed' => 'Transaction Failed',
+        'transaction_reversed' => 'Transaction Reversed',
+        'kyc_submitted' => 'KYC Submitted',
+        'kyc_approved' => 'KYC Approved',
+        'kyc_rejected' => 'KYC Rejected',
+        'kyc_level_upgraded' => 'KYC Level Upgraded',
+        'aml_flag_created' => 'AML Flag Created',
+        'fraud_alert_created' => 'Fraud Alert Created',
+        'role_assigned' => 'Role Assigned',
+        'permission_granted' => 'Permission Granted',
+        'config_changed' => 'Configuration Changed',
     ],
 
     'sensitive_fields' => [
