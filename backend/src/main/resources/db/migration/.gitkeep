@@ -1,0 +1,2 @@
+-- Migraciones Flyway iniciales.
+-- Las tablas finales se definirán durante el diseño entidad-relación.

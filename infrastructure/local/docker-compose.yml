@@ -1,0 +1,15 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: reen_money
+      MYSQL_USER: reen_money
+      MYSQL_PASSWORD: change-me
+      MYSQL_ROOT_PASSWORD: root-change-me
+    ports:
+      - "3306:3306"
+    volumes:
+      - reen_money_mysql:/var/lib/mysql
+
+volumes:
+  reen_money_mysql:
